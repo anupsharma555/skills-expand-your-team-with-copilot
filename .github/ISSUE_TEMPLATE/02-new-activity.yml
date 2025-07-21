@@ -1,0 +1,144 @@
+name: ➕ New Activity Request
+description: Request to add a new extracurricular activity to the system
+title: "[New Activity]: "
+labels: ["enhancement", "new-activity"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Use this template to request adding a new extracurricular activity to the school activities system.
+
+  - type: input
+    id: activity-name
+    attributes:
+      label: Activity name
+      description: What should this new activity be called?
+      placeholder: "Drama Club"
+    validations:
+      required: true
+
+  - type: textarea
+    id: activity-description
+    attributes:
+      label: Activity description
+      description: Provide a detailed description of what this activity involves.
+      placeholder: |
+        Example: A creative drama club where students explore acting, scriptwriting, and stage production. Students will participate in seasonal performances and learn fundamental theater skills including voice projection, character development, and stage presence.
+    validations:
+      required: true
+
+  - type: dropdown
+    id: category
+    attributes:
+      label: Activity category
+      description: Which category best fits this activity?
+      options:
+        - Sports
+        - Arts
+        - Academic
+        - Community
+        - Technology
+        - Other (please specify in description)
+    validations:
+      required: true
+
+  - type: checkboxes
+    id: schedule-days
+    attributes:
+      label: Which days will this activity meet?
+      description: Select all days that apply
+      options:
+        - label: Monday
+          value: Monday
+        - label: Tuesday
+          value: Tuesday
+        - label: Wednesday
+          value: Wednesday
+        - label: Thursday
+          value: Thursday
+        - label: Friday
+          value: Friday
+        - label: Saturday
+          value: Saturday
+        - label: Sunday
+          value: Sunday
+
+  - type: input
+    id: start-time
+    attributes:
+      label: Start time
+      description: What time does the activity start? (Use 24-hour format like 15:30)
+      placeholder: "15:30"
+    validations:
+      required: true
+
+  - type: input
+    id: end-time
+    attributes:
+      label: End time
+      description: What time does the activity end? (Use 24-hour format like 17:00)
+      placeholder: "17:00"
+    validations:
+      required: true
+
+  - type: input
+    id: location
+    attributes:
+      label: Location
+      description: Where will this activity take place?
+      placeholder: "Room 101, Music Room, Gymnasium, etc."
+    validations:
+      required: true
+
+  - type: input
+    id: teacher-sponsor
+    attributes:
+      label: Teacher sponsor
+      description: Which teacher will supervise this activity?
+      placeholder: "Ms. Johnson"
+    validations:
+      required: true
+
+  - type: input
+    id: max-participants
+    attributes:
+      label: Maximum number of participants
+      description: What's the maximum number of students that can join this activity?
+      placeholder: "25"
+    validations:
+      required: true
+
+  - type: textarea
+    id: special-requirements
+    attributes:
+      label: Special requirements or notes
+      description: Any special equipment, prerequisites, or important details about this activity?
+      placeholder: |
+        Example: Requires students to bring their own notebooks and pencils. No prior experience necessary. Activity will culminate in a spring performance for parents.
+
+  - type: markdown
+    attributes:
+      value: |
+        ## For developers and Copilot coding agents:
+        
+        **Acceptance Criteria:**
+        - [ ] New activity is added to the database with all provided information
+        - [ ] Activity appears in the activities list on the frontend
+        - [ ] Activity can be filtered by category and day on the frontend
+        - [ ] Students can successfully register for the new activity
+        - [ ] Activity displays all correct information (time, location, teacher, etc.)
+        - [ ] Participant count tracking works correctly
+        
+        **Implementation Hints:**
+        - Add the new activity to the `activities_collection` in `src/backend/database.py`
+        - Follow the existing activity data structure with fields: name, description, category, schedule_details, location, teacher, max_participants, participants
+        - Ensure schedule_details includes days array, start_time, and end_time
+        - Test that the frontend properly displays the new activity
+        - Verify filtering and search functionality works with the new activity
+        
+        **Technical Context:**
+        - Activities are stored in MongoDB with the activity name as the `_id`
+        - The `schedule_details` field should contain: `{"days": ["Monday", "Wednesday"], "start_time": "15:30", "end_time": "17:00"}`
+        - The `participants` field starts as an empty array `[]`
+        - Frontend JavaScript automatically fetches and displays all activities
+        - Categories must match the filter buttons: sports, arts, academic, community, technology
