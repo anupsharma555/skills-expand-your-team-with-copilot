@@ -205,6 +205,26 @@ section h3 {
   letter-spacing: 0.3px;
 }
 
+/* Tag Container */
+.tag-container {
+  position: relative;
+}
+
+/* Difficulty Tag */
+.difficulty-tag {
+  position: absolute;
+  top: 8px;
+  left: 8px;
+  background: #f3e5f5;
+  color: #7b1fa2;
+  font-size: 0.65rem;
+  font-weight: bold;
+  padding: 2px 6px;
+  border-radius: 10px;
+  text-transform: uppercase;
+  letter-spacing: 0.3px;
+}
+
 /* Capacity Indicator */
 .capacity-container {
   margin: 8px 0;
@@ -574,6 +594,41 @@ footer {
 }
 
 .time-filters {
+  width: 100%;
+}
+
+/* Difficulty Filter styles */
+.difficulty-filters {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.difficulty-filter {
+  background-color: var(--background);
+  border: 1px solid var(--border);
+  color: var(--text-primary);
+  padding: 4px 10px;
+  border-radius: 15px;
+  font-size: 0.8rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.difficulty-filter.active {
+  background-color: var(--primary);
+  color: white;
+  border-color: var(--primary-dark);
+}
+
+/* Hover effect for inactive difficulty filters */
+.difficulty-filter:hover {
+  background-color: var(--primary-light);
+  color: white;
+}
+
+.difficulty-filters {
   width: 100%;
 }
 
