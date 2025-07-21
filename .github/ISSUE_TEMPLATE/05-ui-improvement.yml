@@ -1,0 +1,152 @@
+name: 🎨 User Interface Improvement
+description: Request improvements to the look, feel, or usability of the activities system
+title: "[UI]: "
+labels: ["enhancement", "ui-ux", "accessibility"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Use this template to request improvements to how the activities system looks or works for users. This includes making it easier to use, more accessible, or more visually appealing.
+
+  - type: dropdown
+    id: improvement-area
+    attributes:
+      label: Which part of the interface needs improvement?
+      description: Select the main area you'd like to see improved
+      options:
+        - Activities list and browsing
+        - Search and filtering
+        - Student registration process
+        - Teacher login and controls
+        - Mobile phone/tablet experience
+        - Visual design and colors
+        - Text size and readability
+        - Overall page layout
+        - Error messages and feedback
+        - Other (please specify below)
+    validations:
+      required: true
+
+  - type: textarea
+    id: current-problem
+    attributes:
+      label: What's currently difficult or confusing?
+      description: Describe what makes the current interface hard to use or understand.
+      placeholder: |
+        Example: The activity cards are too small on mobile phones, making it hard for students to read the activity details and click the registration button. The text gets cut off and students have to scroll horizontally to see everything.
+    validations:
+      required: true
+
+  - type: textarea
+    id: desired-improvement
+    attributes:
+      label: How would you like it to work instead?
+      description: Describe how the interface should look or behave to be better.
+      placeholder: |
+        Example: On mobile phones, activity cards should stack vertically and expand to show all information clearly. The registration button should be large enough to tap easily with a finger, and all text should be readable without zooming in.
+    validations:
+      required: true
+
+  - type: checkboxes
+    id: who-affected
+    attributes:
+      label: Who has trouble with the current interface? (Select all that apply)
+      options:
+        - label: Students using mobile phones
+          value: mobile-students
+        - label: Students using computers/laptops
+          value: desktop-students  
+        - label: Teachers using the system
+          value: teachers
+        - label: Users with visual impairments
+          value: visual-impairments
+        - label: Users who aren't tech-savvy
+          value: non-technical
+        - label: Everyone - it's generally confusing
+          value: everyone
+        - label: New users who haven't used it before
+          value: new-users
+
+  - type: textarea
+    id: specific-examples
+    attributes:
+      label: Can you give a specific example?
+      description: Describe a specific situation where the interface causes problems.
+      placeholder: |
+        Example: When Mrs. Johnson was trying to register a student for Drama Club on her phone during lunch period, she accidentally clicked the wrong activity because the buttons were too close together. She had to try three times before successfully registering the student for the correct activity.
+
+  - type: dropdown
+    id: device-type
+    attributes:
+      label: What type of device is mainly affected?
+      description: This helps us prioritize the most important improvements
+      options:
+        - Mobile phones (most important)
+        - Tablets (iPad, etc.)
+        - Laptop computers
+        - Desktop computers
+        - All devices equally
+        - I'm not sure
+
+  - type: textarea
+    id: accessibility-concerns
+    attributes:
+      label: Are there any accessibility concerns?
+      description: Any issues related to students or teachers with disabilities, vision problems, or other accessibility needs?
+      placeholder: |
+        Example: The current text is too small for students who have trouble reading small fonts, and there's no way to make it larger. The color contrast between the text and background is also hard to see in bright sunlight.
+
+  - type: input
+    id: color-preferences
+    attributes:
+      label: Any specific color or design preferences?
+      description: Mention any school colors, preferred styles, or design requirements
+      placeholder: "School colors are blue and gold, should look professional but welcoming"
+
+  - type: markdown
+    attributes:
+      value: |
+        ## For developers and Copilot coding agents:
+        
+        **Acceptance Criteria:**
+        - [ ] UI improvements address the specific usability issues described
+        - [ ] Changes work well across different screen sizes and devices
+        - [ ] Interface remains intuitive and easy to navigate
+        - [ ] Accessibility standards are improved (WCAG 2.1 guidelines)
+        - [ ] Visual design is consistent throughout the application
+        - [ ] No existing functionality is broken by the changes
+        - [ ] Improvements are tested on mobile devices and desktop
+        
+        **Implementation Hints:**
+        - Focus on CSS improvements in `src/static/styles.css`
+        - Implement responsive design using CSS media queries
+        - Consider CSS Grid or Flexbox for better layouts
+        - Improve color contrast ratios for accessibility
+        - Add focus indicators for keyboard navigation
+        - Use relative units (rem, em, %) for better scaling
+        - Test on actual mobile devices, not just browser dev tools
+        - Consider touch target sizes (minimum 44px for mobile)
+        
+        **Technical Context:**
+        - Current CSS is in `src/static/styles.css`
+        - HTML structure is in `src/static/index.html`
+        - JavaScript interactions are in `src/static/app.js`
+        - No CSS frameworks are currently used (vanilla CSS)
+        - Design should work without JavaScript for basic functionality
+        - Maintain compatibility with common browsers
+        
+        **Accessibility Guidelines:**
+        - Minimum color contrast ratio of 4.5:1 for normal text
+        - Touch targets should be at least 44x44 pixels
+        - Text should be readable at 200% zoom
+        - All interactive elements should be keyboard accessible
+        - Use semantic HTML elements where possible
+        - Provide alternative text for any images
+        - Ensure proper heading hierarchy (h1, h2, h3)
+        
+        **Responsive Design Priorities:**
+        - Mobile-first approach (design for small screens first)
+        - Breakpoints around 768px (tablet) and 1024px (desktop)
+        - Ensure touch-friendly interface on mobile devices
+        - Stack content vertically on narrow screens
+        - Make buttons and links appropriately sized for touch

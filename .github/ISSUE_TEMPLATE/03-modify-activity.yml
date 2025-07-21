@@ -1,0 +1,155 @@
+name: ✏️ Modify Existing Activity
+description: Request changes to an existing activity's details
+title: "[Modify Activity]: "
+labels: ["enhancement", "activity-modification"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Use this template to request changes to an existing activity in the school activities system.
+
+  - type: input
+    id: activity-name
+    attributes:
+      label: Which activity needs to be changed?
+      description: Enter the exact name of the existing activity
+      placeholder: "Chess Club"
+    validations:
+      required: true
+
+  - type: textarea
+    id: what-to-change
+    attributes:
+      label: What changes are needed?
+      description: Clearly describe what needs to be modified about this activity.
+      placeholder: |
+        Example: The Chess Club needs to change its meeting time from 3:30 PM to 4:00 PM, and move from Room 101 to Room 203 due to a scheduling conflict with the Math Tutoring program.
+    validations:
+      required: true
+
+  - type: textarea
+    id: reason-for-change
+    attributes:
+      label: Why is this change needed?
+      description: Help us understand the reason behind this modification.
+      placeholder: |
+        Example: The music teacher needs Room 101 for extra band practice sessions, and several chess club members have requested a later start time to allow for a snack break after regular classes end.
+    validations:
+      required: true
+
+  - type: checkboxes
+    id: change-type
+    attributes:
+      label: What type of changes are needed? (Select all that apply)
+      options:
+        - label: Change meeting schedule (days/times)
+          value: schedule
+        - label: Change location/room
+          value: location
+        - label: Change activity description
+          value: description
+        - label: Change teacher/sponsor
+          value: teacher
+        - label: Change maximum number of participants
+          value: max-participants
+        - label: Change activity category
+          value: category
+        - label: Other (please specify below)
+          value: other
+
+  - type: input
+    id: new-schedule-days
+    attributes:
+      label: New meeting days (if changing schedule)
+      description: List the days when the activity should meet
+      placeholder: "Monday, Wednesday, Friday"
+
+  - type: input
+    id: new-start-time
+    attributes:
+      label: New start time (if changing schedule)
+      description: Use 24-hour format like 16:00 for 4:00 PM
+      placeholder: "16:00"
+
+  - type: input
+    id: new-end-time
+    attributes:
+      label: New end time (if changing schedule)
+      description: Use 24-hour format like 17:30 for 5:30 PM
+      placeholder: "17:30"
+
+  - type: input
+    id: new-location
+    attributes:
+      label: New location (if changing location)
+      description: Where should the activity meet?
+      placeholder: "Room 203"
+
+  - type: input
+    id: new-teacher
+    attributes:
+      label: New teacher/sponsor (if changing teacher)
+      description: Who will be the new supervisor?
+      placeholder: "Mr. Smith"
+
+  - type: input
+    id: new-max-participants
+    attributes:
+      label: New maximum participants (if changing capacity)
+      description: What should the new participant limit be?
+      placeholder: "30"
+
+  - type: textarea
+    id: new-description
+    attributes:
+      label: New activity description (if changing description)
+      description: Provide the updated description for this activity
+      placeholder: |
+        Example: An intermediate chess club focusing on tournament preparation and advanced strategies. Students will participate in inter-school competitions and learn opening theory, endgame techniques, and tactical puzzles.
+
+  - type: textarea
+    id: impact-on-students
+    attributes:
+      label: How will this affect current participants?
+      description: Consider how these changes might impact students already registered for this activity.
+      placeholder: |
+        Example: Current participants have been notified about the time change via email. Three students have confirmed they can still attend at the new time, and one student needs to withdraw due to a conflict with soccer practice.
+
+  - type: date
+    id: effective-date
+    attributes:
+      label: When should these changes take effect?
+      description: Select the date when the changes should start
+
+  - type: markdown
+    attributes:
+      value: |
+        ## For developers and Copilot coding agents:
+        
+        **Acceptance Criteria:**
+        - [ ] Existing activity is located in the database using the provided name
+        - [ ] All requested changes are applied to the activity record
+        - [ ] Updated activity information displays correctly on the frontend
+        - [ ] Filtering and search still work properly with the updated activity
+        - [ ] Existing participant registrations are preserved unless explicitly affected
+        - [ ] Changes are validated (times make sense, location exists, etc.)
+        
+        **Implementation Hints:**
+        - Update the activity in `activities_collection` using MongoDB's `update_one()` method
+        - Preserve the existing `participants` array unless specifically requested to clear it
+        - Validate that new schedule times are logical (end time after start time)
+        - If changing category, ensure it matches frontend filter options
+        - Update the activity's `_id` only if the name is changing (requires delete and recreate)
+        - Test that the frontend properly reflects all changes
+        
+        **Technical Context:**
+        - Activities are stored in MongoDB with structure: `{_id: name, description, category, schedule_details: {days: [], start_time, end_time}, location, teacher, max_participants, participants: []}`
+        - Schedule changes affect the `schedule_details` object
+        - Category must be one of: sports, arts, academic, community, technology
+        - Time format should be 24-hour (HH:MM)
+        - Frontend automatically refreshes activity list from API
+        
+        **Limitations:**
+        - If changing the activity name, existing registrations will need to be transferred to the new name
+        - Changes take effect immediately and may require notifying current participants
+        - Consider capacity changes carefully - reducing max_participants below current participant count needs special handling

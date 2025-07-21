@@ -1,0 +1,131 @@
+name: 💡 Feature Request
+description: Suggest a new feature or improvement for the activities system
+title: "[Feature]: "
+labels: ["enhancement", "feature-request"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Use this template to suggest new features or improvements to make the school activities system better for students and teachers.
+
+  - type: textarea
+    id: feature-description
+    attributes:
+      label: What new feature would you like to see?
+      description: Clearly describe the feature or improvement you're requesting.
+      placeholder: |
+        Example: Add the ability to send email notifications to students when they successfully register for an activity, and send reminders about upcoming activity meetings.
+    validations:
+      required: true
+
+  - type: textarea
+    id: problem-solving
+    attributes:
+      label: What problem would this feature solve?
+      description: Explain what current challenge or inconvenience this feature would address.
+      placeholder: |
+        Example: Currently, students don't receive confirmation when they register for activities, and teachers have to manually remind students about meetings. This leads to confusion about whether registration was successful and students sometimes forgetting about activities they signed up for.
+    validations:
+      required: true
+
+  - type: textarea
+    id: user-benefit
+    attributes:
+      label: Who would benefit from this feature?
+      description: Describe who would use this feature and how it would help them.
+      placeholder: |
+        Example: This would benefit both students (who would get clear confirmation and reminders) and teachers (who wouldn't need to manually send reminder messages). Parents might also appreciate knowing what activities their children are participating in.
+    validations:
+      required: true
+
+  - type: dropdown
+    id: priority
+    attributes:
+      label: How important is this feature?
+      description: Help us understand the priority of this request
+      options:
+        - Nice to have - would improve the experience
+        - Important - would solve a significant problem
+        - Critical - needed to address a major issue
+        - I'm not sure
+    validations:
+      required: true
+
+  - type: textarea
+    id: suggested-solution
+    attributes:
+      label: Do you have ideas for how this could work?
+      description: Share any thoughts about how this feature might be implemented (no technical knowledge required)
+      placeholder: |
+        Example: When a student registers, they could get an email saying "You're now registered for Chess Club - meetings are Mondays and Wednesdays at 3:30 PM in Room 101." Then maybe send a weekly email on Sunday nights reminding them of their activities for the upcoming week.
+
+  - type: checkboxes
+    id: feature-area
+    attributes:
+      label: Which area of the system does this relate to? (Select all that apply)
+      options:
+        - label: Student registration process
+          value: registration
+        - label: Activity browsing and searching
+          value: browsing
+        - label: Teacher management features
+          value: teacher-tools
+        - label: Email notifications and communications
+          value: communications
+        - label: Reporting and data export
+          value: reporting
+        - label: User interface and design
+          value: ui-design
+        - label: Mobile device compatibility
+          value: mobile
+        - label: Accessibility features
+          value: accessibility
+        - label: Other (please specify in description)
+          value: other
+
+  - type: textarea
+    id: additional-context
+    attributes:
+      label: Any additional context or examples?
+      description: Share any other relevant information, examples from other systems, or specific scenarios where this feature would be helpful.
+      placeholder: |
+        Example: Similar to how our school's lunch ordering system sends confirmation emails, or like the reminder texts that the library sends for overdue books. This would be especially helpful during the busy start of each semester when students are signing up for multiple activities.
+
+  - type: markdown
+    attributes:
+      value: |
+        ## For developers and Copilot coding agents:
+        
+        **Acceptance Criteria:**
+        - [ ] Feature requirements are clearly understood from the description
+        - [ ] Implementation approach is planned and documented
+        - [ ] Feature is built according to specifications
+        - [ ] Feature integrates seamlessly with existing functionality
+        - [ ] Feature is tested with different user scenarios
+        - [ ] User interface is intuitive and accessible
+        - [ ] Feature documentation is updated if needed
+        
+        **Implementation Hints:**
+        - Consider the existing FastAPI architecture and MongoDB database structure
+        - For email features, research Python email libraries (smtplib, email packages)
+        - For UI improvements, work with the existing HTML/CSS/JavaScript frontend
+        - For new API endpoints, follow the pattern in `src/backend/routers/`
+        - Consider user authentication and authorization requirements
+        - Plan for error handling and edge cases
+        - Consider performance impact on the existing system
+        
+        **Technical Context:**
+        - Application uses FastAPI backend with MongoDB database
+        - Frontend is vanilla HTML/CSS/JavaScript (no frameworks)
+        - Current authentication is teacher-based for student registrations
+        - Data is stored in memory and resets on server restart
+        - No current email or notification system exists
+        - Application follows simple architecture suitable for non-technical maintenance
+        
+        **Constraints and Guidelines:**
+        - Maintain simplicity - solution should be easy to understand and maintain
+        - Use only HTML, CSS, JavaScript, and Python as specified in guidelines
+        - Don't add complex dependencies or frameworks
+        - Ensure changes don't break existing functionality
+        - Consider that staff maintaining this system are not technical experts
+        - Keep user interface simple and intuitive for students and teachers

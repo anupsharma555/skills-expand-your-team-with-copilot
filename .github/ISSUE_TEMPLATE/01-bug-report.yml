@@ -1,0 +1,104 @@
+name: 🐛 Bug Report
+description: Report a problem with the school activities system
+title: "[Bug]: "
+labels: ["bug", "needs-triage"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thank you for taking the time to report a bug! This helps us improve the activities management system for students and teachers.
+
+  - type: textarea
+    id: problem-description
+    attributes:
+      label: What went wrong?
+      description: Clearly describe what problem you encountered while using the activities system.
+      placeholder: |
+        Example: When I try to register a student for the Chess Club activity, the system shows an error message saying "Failed to update activity" even though there are still spots available.
+    validations:
+      required: true
+
+  - type: textarea
+    id: steps-to-reproduce
+    attributes:
+      label: Steps to reproduce the problem
+      description: Tell us exactly what steps you took when the problem occurred.
+      placeholder: |
+        Example:
+        1. Go to the activities page
+        2. Click on "Chess Club" activity  
+        3. Enter student email "john.doe@mergington.edu"
+        4. Click "Register" button
+        5. Error message appears
+    validations:
+      required: true
+
+  - type: textarea
+    id: expected-behavior
+    attributes:
+      label: What should have happened instead?
+      description: Describe what you expected to happen.
+      placeholder: |
+        Example: The student should be successfully registered for the Chess Club and appear in the participants list.
+    validations:
+      required: true
+
+  - type: dropdown
+    id: when-does-it-happen
+    attributes:
+      label: When does this problem occur?
+      description: Help us understand how often this happens.
+      options:
+        - Every time I try
+        - Sometimes (about half the time)
+        - Rarely (only occasionally)
+        - I'm not sure
+    validations:
+      required: true
+
+  - type: input
+    id: student-email
+    attributes:
+      label: Student email involved (if applicable)
+      description: If this involves a specific student registration, what email address?
+      placeholder: "student@mergington.edu"
+
+  - type: input
+    id: activity-name
+    attributes:
+      label: Activity name involved (if applicable)
+      description: If this involves a specific activity, what is its name?
+      placeholder: "Chess Club"
+
+  - type: textarea
+    id: additional-context
+    attributes:
+      label: Anything else we should know?
+      description: Any additional information that might help us understand and fix the problem.
+      placeholder: |
+        Example: This started happening after we added the new Drama Club activity last week. The problem only seems to affect activities that meet on Fridays.
+
+  - type: markdown
+    attributes:
+      value: |
+        ## For developers and Copilot coding agents:
+        
+        **Acceptance Criteria:**
+        - [ ] The reported bug is reproducible using the provided steps
+        - [ ] The root cause is identified in the codebase
+        - [ ] A fix is implemented that resolves the issue
+        - [ ] The fix is tested to ensure it doesn't break other functionality
+        - [ ] The fix handles edge cases appropriately
+        
+        **Implementation Hints:**
+        - Check the `/activities/{activity_name}/signup` endpoint in `src/backend/routers/activities.py`
+        - Verify database operations in `src/backend/database.py`
+        - Look for error handling and validation logic
+        - Test with different activity states (full, empty, non-existent)
+        - Check frontend JavaScript for proper error display
+        
+        **Technical Context:**
+        - This is a FastAPI application with MongoDB database
+        - Frontend uses vanilla JavaScript with async/await for API calls
+        - Authentication is required for student registration via teacher login
+        - All data is stored in memory and resets on server restart
